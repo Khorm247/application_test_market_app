@@ -3,22 +3,24 @@ package com.github.khorm247;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Product {
 
     // ### ATTRIBUTES ###
     private String description;
     private int quality;
-    private Date expirationDate;
-    private BigDecimal price;
+    private Optional<Date> expirationDate;
+    private final BigDecimal basePrice;
+    private Date storedAtDate;
 
 
     // ### Constructors ###
-    public Product(String description, int quality, Date expirationDate, BigDecimal price) {
+    public Product(String description, int quality, Optional<Date> expirationDate, BigDecimal basePrice) {
         this.description = description;
         this.quality = quality;
         this.expirationDate = expirationDate;
-        this.price = price;
+        this.basePrice = basePrice;
     }
 
     // ### Methods ###
@@ -28,7 +30,6 @@ public class Product {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -36,25 +37,19 @@ public class Product {
     public int getQuality() {
         return quality;
     }
-
     public void setQuality(int quality) {
         this.quality = quality;
     }
 
-    public Date getExpirationDate() {
+    public Optional<Date> getExpirationDate() {
         return expirationDate;
     }
-
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(Optional<Date> expirationDate) {
         this.expirationDate = expirationDate;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public BigDecimal getBasePrice() {
+        return basePrice;
     }
 
 
@@ -65,7 +60,7 @@ public class Product {
                 "description='" + description + '\'' +
                 ", quality=" + quality +
                 ", expirationDate=" + expirationDate +
-                ", price=" + price +
+                ", price=" + basePrice +
                 '}';
     }
 
@@ -76,11 +71,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return quality == product.quality && Objects.equals(description, product.description) && Objects.equals(expirationDate, product.expirationDate) && Objects.equals(price, product.price);
+        return quality == product.quality && Objects.equals(description, product.description) && Objects.equals(expirationDate, product.expirationDate) && Objects.equals(basePrice, product.basePrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, quality, expirationDate, price);
+        return Objects.hash(description, quality, expirationDate, basePrice);
     }
 }
