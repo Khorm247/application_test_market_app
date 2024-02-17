@@ -1,4 +1,6 @@
-package com.github.khorm247;
+package com.github.khorm247.model;
+
+import com.github.khorm247.model.Product;
 
 import java.math.BigDecimal;
 
